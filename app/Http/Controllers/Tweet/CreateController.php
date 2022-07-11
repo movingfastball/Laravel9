@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Tweet;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Tweet\CreateRequest;
 use App\Models\Tweet;
-use Illuminate\Http\Request;
 
 class CreateController extends Controller
 {
@@ -14,10 +14,11 @@ class CreateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(CreateRequest $request)
     {
-        $tweets = Tweet::all();
-        return view('tweet.index')
-        ->with('tweets', $tweets);
+        $tweet = new Tweet;
+        $tweet->content = $request->tweet();
+        $tweet->save();
+        return redirect()->route('tweet.index');
     }
 }
