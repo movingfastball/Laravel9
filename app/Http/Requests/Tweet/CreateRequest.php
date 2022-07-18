@@ -19,7 +19,7 @@ class CreateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
@@ -28,13 +28,14 @@ class CreateRequest extends FormRequest
         ];
     }
 
-    public function tweet(): string
-    {
-        return $this->input('tweet');
-    }
-
+    // Requestクラスのuser関数で今自分がログインしているユーザーが取得できる
     public function userId(): int
     {
         return $this->user()->id;
+    }
+
+    public function tweet(): string
+    {
+    return $this->input('tweet');
     }
 }
